@@ -1,17 +1,45 @@
 <?php
 $name = "Juan Rodriguez";
+$limitMonths = 2000;
 $jobs = [
     [
-        'title' => 'PHP DEVELOPER'
+        'title' => 'PHP DEVELOPER',
+        'description' => 'This is a work with PHP',
+        'visible' => true,
+        'months' => 16
     ],
     [
-        'title' => 'PYTHON DEVELOPER'
+        'title' => 'PYTHON DEVELOPER',
+        'description' => 'This is a work with PYTHON',
+        'visible' => true,
+        'months' => 14
     ],
     [
-        'title' => 'GO DEVELOPER'
+        'title' => 'GO DEVELOPER',
+        'description' => 'This is a work with GO',
+        'visible' => true,
+        'months' => 5
     ]
 ];
-var_dump($jobs);
+function getDuration($months)
+{
+    $years = floor($months / 12);
+    $extraMonths = $months % 12;
+    if ($years == 0) {
+        return "$extraMonths months";
+    }
+    return "$years years $extraMonths months";
+}
+
+function printJob($job)
+{
+    echo '<h5 class="text-info">' . $job['title'] . '</h5>
+    <p>' . $job['description'] . '</p>
+    <ul class="unstyled">
+        <li>' . getDuration($job['months']) . '</li>
+        <li>item2</li>
+    </ul>';
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -85,22 +113,19 @@ var_dump($jobs);
             <div class="col-md-8">
                 <h1>Work Experience</h1>
                 <hr>
-                <h5 class="text-info">PHP DEVELOPER</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum suscipit soluta mollitia, iusto itaque fugiat a ipsum sunt sed! Quidem quo ex esse aliquam, cumque magni ad eveniet praesentium neque.</p>
-                <ul class="unstyled">
-                    <li>item1</li>
-                    <li>item2</li>
-                    <li>item3</li>
-                    <li>item4</li>
-                </ul>
-                <h5 class="text-info">PYTHON DEVELOPER</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum suscipit soluta mollitia, iusto itaque fugiat a ipsum sunt sed! Quidem quo ex esse aliquam, cumque magni ad eveniet praesentium neque.</p>
-                <ul class="unstyled">
-                    <li>item1</li>
-                    <li>item2</li>
-                    <li>item3</li>
-                    <li>item4</li>
-                </ul>
+                <?php
+                $totalMonths = 0;
+                foreach ($jobs as $job) {
+                    $totalMonths += $job['months'];
+                    if ($job['visible'] === false) {
+                        continue;
+                    }
+                    if ($totalMonths > $limitMonths) {
+                        break;
+                    }
+                    printJob($job);
+                }
+                ?>
                 <!-- PROJECTS -->
                 <h1>Projects</h1>
                 <hr>
