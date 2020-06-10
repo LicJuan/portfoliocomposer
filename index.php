@@ -1,3 +1,18 @@
+<?php
+$name = "Juan Rodriguez";
+$jobs = [
+    [
+        'title' => 'PHP DEVELOPER'
+    ],
+    [
+        'title' => 'PYTHON DEVELOPER'
+    ],
+    [
+        'title' => 'GO DEVELOPER'
+    ]
+];
+var_dump($jobs);
+?>
 <!doctype html>
 <html lang="en">
 
